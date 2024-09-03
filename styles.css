@@ -1,5 +1,78 @@
-html, body {
+@import url('https://fonts.googleapis.com/css2?family=Castoro:ital@0;1&display=swap');
+
+:root {
+    --gray: #e4e4e4;
+}
+
+html,
+body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+body * {
+    font-family: 'Castoro', serif;
+    text-align: center;
+}
+
+body {
+    overflow: hidden;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+}
+
+#title {
+    width: 600px;
+}
+
+#container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 10em;
+    min-width: 300px;
+    width: 450px;
+    background-color: var(--gray);
+    border-radius: 15px;
+}
+
+#input-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 80%;
+    padding-bottom: 1em;
+}
+
+#title {
+    font-size: 2.5rem;
+}
+
+#input-text {
+    font-size: 1.5rem;
+}
+
+#input-text > * {
+    height: 2rem;
+}
+
+#number {
+    width: 97%;
+    font-size: 2rem;
+}
+
+#convert-btn {
+    width: 100%;
+    font-size: 1.2rem;
+    margin: 1.5em 0;
+}
+
+#convert-btn, #number {
+    height: 2.5rem;
 }
