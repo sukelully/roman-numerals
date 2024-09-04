@@ -7,14 +7,32 @@ const resultArr = [];
 let tracker = "";
 const convert = (num) => {
     if (num === 0) {
-        console.log('loop finished');
-
-        return tracker;
+        return;
     } else if (num % 1000 === 0) {
-        tracker += "M";
-        console.log(tracker);
-        num -= 1000;
+        return "M".repeat(num / 1000);
+    } else if (num % 100 === 0) {
+        return "C".repeat(num / 100);
     }
+}
+
+
+const updateInputArray = () => {
+    let increment = 1;
+    for (let i = 0; i < inputArr.length; i++) {
+        inputArr[i] *= increment;
+        increment *= 10;
+    }
+}
+
+const updateOutput = () => {
+    if (checkInput(inputNum.value)) {
+        return;
+    }
+    for (let i = 0; i < inputArr.length; i++) {
+        resultArr[i] = convert(inputArr[i]);
+        tracker = "";
+    }
+    output.innerText = resultArr.reverse().join('');
 }
 
 const checkInput = (num) => {
@@ -29,30 +47,6 @@ const checkInput = (num) => {
     }
     inputArr = num.split('').reverse();;
     updateInputArray();
-}
-
-const updateInputArray = () => {
-    let increment = 1;
-    for (let i = 0; i < inputArr.length; i++) {
-        // if (inputArr[i+1] === '0') {
-        //     inputArr[i+1] = 1;
-        // }
-        inputArr[i] *= increment;
-        // console.log(inputArr[i]);
-        increment *= 10;
-    }
-}
-
-const updateOutput = () => {
-    if (checkInput(inputNum.value)) {
-        return;
-    }
-    for (let i = 0; i < inputArr.length; i++) {
-        console.log(convert(inputArr[i]));
-        resultArr[i] = convert(inputArr[i]);
-    }
-    // tracker = 0;
-    output.innerText = resultArr.join('');
 }
 
 btn.addEventListener('click', updateOutput);
