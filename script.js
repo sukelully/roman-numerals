@@ -10,8 +10,13 @@ const convert = (num) => {
         console.log('loop finished');
         return;
     } else if (num < 4) {
-        resultArr.push('I');
+        // resultArr.push('I');
         convert(num-1);
+        return 'I';
+    } else if (num === 5) {
+        // resultArr.push('V');
+        // console.log('huh');
+        return 'V'
     }
 }
 
@@ -42,7 +47,9 @@ const updateOutput = () => {
     if (checkInput(inputNum.value)) {
         return;
     }
-    convert(inputNum.value);
+    for (let i = 0; i < inputArr.length; i++) {
+        resultArr[i] = convert(inputNum.value);
+    }
     output.innerText = resultArr.join('');
 }
 
