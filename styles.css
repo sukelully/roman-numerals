@@ -76,3 +76,7 @@ body {
 #convert-btn, #number {
     height: 2.5rem;
 }
+
+#output {
+    font-size: 2rem;
+}
