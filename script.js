@@ -4,14 +4,39 @@ const output = document.getElementById('output');
 
 let inputArr;
 const resultArr = [];
-let tracker = "";
+
 const convert = (num) => {
     if (num === 0) {
         return;
     } else if (num % 1000 === 0) {
         return "M".repeat(num / 1000);
+    } else if (num % 900 === 0) {
+        return "CM".repeat(num / 900);
+    } else if (num % 500 === 0) {
+        return "D".repeat(num / 500);
+    } else if (num % 400 === 0) {
+        return "CD".repeat(num / 400);
     } else if (num % 100 === 0) {
         return "C".repeat(num / 100);
+    } else if (num % 90 === 0) {
+        return "XC".repeat(num / 90);
+    } else if (num % 50 === 0) {
+        return "L".repeat(num / 50);
+    } else if (num % 40 === 0) {
+        return "XL".repeat(num / 40);
+    } else if (num % 10 === 0) {
+        return "X".repeat(num / 10);
+    } else if (num % 9 === 0) {
+        return "IX".repeat(num / 9);
+    } else if (num % 5 === 0) {
+        return "V".repeat(num / 5);
+    } else if (num % 4 === 0) {
+        return "IV".repeat(num / 4);
+    } else if (num % 1 === 0) {
+        return "I".repeat(num / 1);
+    } else {
+        console.log("ERROR: Default case triggered");
+        return;
     }
 }
 
@@ -30,7 +55,6 @@ const updateOutput = () => {
     }
     for (let i = 0; i < inputArr.length; i++) {
         resultArr[i] = convert(inputArr[i]);
-        tracker = "";
     }
     output.innerText = resultArr.reverse().join('');
 }
