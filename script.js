@@ -4,19 +4,16 @@ const output = document.getElementById('output');
 
 let inputArr;
 const resultArr = [];
-
+let tracker = "";
 const convert = (num) => {
     if (num === 0) {
         console.log('loop finished');
-        return;
-    } else if (num < 4) {
-        // resultArr.push('I');
-        convert(num-1);
-        return 'I';
-    } else if (num === 5) {
-        // resultArr.push('V');
-        // console.log('huh');
-        return 'V'
+
+        return tracker;
+    } else if (num % 1000 === 0) {
+        tracker += "M";
+        console.log(tracker);
+        num -= 1000;
     }
 }
 
@@ -37,8 +34,11 @@ const checkInput = (num) => {
 const updateInputArray = () => {
     let increment = 1;
     for (let i = 0; i < inputArr.length; i++) {
+        // if (inputArr[i+1] === '0') {
+        //     inputArr[i+1] = 1;
+        // }
         inputArr[i] *= increment;
-        console.log(inputArr[i]);
+        // console.log(inputArr[i]);
         increment *= 10;
     }
 }
@@ -48,8 +48,10 @@ const updateOutput = () => {
         return;
     }
     for (let i = 0; i < inputArr.length; i++) {
-        resultArr[i] = convert(inputNum.value);
+        console.log(convert(inputArr[i]));
+        resultArr[i] = convert(inputArr[i]);
     }
+    // tracker = 0;
     output.innerText = resultArr.join('');
 }
 
