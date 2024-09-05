@@ -80,3 +80,15 @@ body {
 #output {
     font-size: 2rem;
 }
+
+@media only screen and (max-width: 600px) {
+    body {
+        position: relative;
+        background-color: var(--gray);
+    }
+
+    #container {
+        width: 50vw;
+        align-items: center;
+    }
+}

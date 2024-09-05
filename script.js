@@ -2,75 +2,63 @@ const inputNum = document.getElementById('number');
 const btn = document.getElementById('convert-btn');
 const output = document.getElementById('output');
 
-let inputArr;
-const resultArr = [];
-
 const convert = (num) => {
-    if (num === 0) {
-        return;
-    } else if (num % 1000 === 0) {
-        return "M".repeat(num / 1000);
-    } else if (num % 900 === 0) {
-        return "CM".repeat(num / 900);
-    } else if (num % 500 === 0) {
-        return "D".repeat(num / 500);
-    } else if (num % 400 === 0) {
-        return "CD".repeat(num / 400);
-    } else if (num % 100 === 0) {
-        return "C".repeat(num / 100);
-    } else if (num % 90 === 0) {
-        return "XC".repeat(num / 90);
-    } else if (num % 50 === 0) {
-        return "L".repeat(num / 50);
-    } else if (num % 40 === 0) {
-        return "XL".repeat(num / 40);
-    } else if (num % 10 === 0) {
-        return "X".repeat(num / 10);
-    } else if (num % 9 === 0) {
-        return "IX".repeat(num / 9);
-    } else if (num % 5 === 0) {
-        return "V".repeat(num / 5);
-    } else if (num % 4 === 0) {
-        return "IV".repeat(num / 4);
-    } else if (num % 1 === 0) {
-        return "I".repeat(num / 1);
-    } else {
-        console.log("ERROR: Default case triggered");
-        return;
-    }
-}
+    const romanNumerals = [
+        { value: 1000, symbol: 'M' },
+        { value: 900, symbol: 'CM' },
+        { value: 500, symbol: 'D' },
+        { value: 400, symbol: 'CD' },
+        { value: 100, symbol: 'C' },
+        { value: 90, symbol: 'XC' },
+        { value: 50, symbol: 'L' },
+        { value: 40, symbol: 'XL' },
+        { value: 10, symbol: 'X' },
+        { value: 9, symbol: 'IX' },
+        { value: 5, symbol: 'V' },
+        { value: 4, symbol: 'IV' },
+        { value: 1, symbol: 'I' }
+    ];
 
-
-const updateInputArray = () => {
-    let increment = 1;
-    for (let i = 0; i < inputArr.length; i++) {
-        inputArr[i] *= increment;
-        increment *= 10;
+    let result = '';
+    for (let i = 0; i < romanNumerals.length; i++) {
+        while (num >= romanNumerals[i].value) {
+            result += romanNumerals[i].symbol;
+            num -= romanNumerals[i].value;
+        }
     }
-}
-
-const updateOutput = () => {
-    if (checkInput(inputNum.value)) {
-        return;
-    }
-    for (let i = 0; i < inputArr.length; i++) {
-        resultArr[i] = convert(inputArr[i]);
-    }
-    output.innerText = resultArr.reverse().join('');
+    return result;
 }
 
 const checkInput = (num) => {
+    if (inputNum.value.trim() === "") { 
+        output.innerText = "Please enter a valid number";
+        return true;
+    }
+
+    num = Number(num);
+    
+    if (isNaN(num)) {
+        output.innerText = "Please enter a valid number";
+        return true;
+    }
+
     if (num < 1) {
         output.innerText = "Please enter a number greater than or equal to 1";
-        console.log("Please enter a number greater than or equal to 1");
         return true;
     } else if (num >= 4000) {
         output.innerText = "Please enter a number less than or equal to 3999";
-        console.log("Please enter a number less than or equal to 3999");
         return true;
     }
-    inputArr = num.split('').reverse();;
-    updateInputArray();
+
+    return false;
+};
+
+const updateOutput = () => {
+    const num = parseInt(inputNum.value, 10);
+    if (checkInput(num)) {
+        return;
+    }
+    output.innerText = convert(num);
 }
 
 btn.addEventListener('click', updateOutput);
